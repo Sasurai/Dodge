@@ -44,7 +44,7 @@ int main()
 {
 	// Dummy call, you need to put the actual info. of the game for the API to work
 	gjAPI gjApi(00000,"PrivateKey");
-  glEnable(GL_TEXTURE_2D);
+	glEnable(GL_TEXTURE_2D);
 	glClearColor(0.1f,0.3f,0.3f,1.0f);
 	sf::RenderWindow window(sf::VideoMode(WINDOWSIZE, WINDOWSIZE), "Dodge!");
 	MenuWindow menuWindow(window);
@@ -77,11 +77,11 @@ int main()
 	gameState.update(time.asSeconds());
 	int state = 0; // Menu
 
-  while (window.isOpen())
-  {	
-  sf::Time time = clock.restart();
-  int ev;
-  gjApi.Update();
+	while (window.isOpen())
+	{	
+	sf::Time time = clock.restart();
+	int ev;
+	gjApi.Update();
 		switch(state){
 		case 5: // Login window
 			ev = loginWindow.checkEvents();
@@ -148,6 +148,6 @@ int main()
 			// I need to make a credits screen before release
 			break;
 		}
-  }
-  return 0;
+	}
+	return 0;
 }
