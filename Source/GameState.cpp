@@ -80,8 +80,7 @@ GameState::GameState(sf::RenderWindow &window, gjAPI* gjApi) :
 	// Camera and graphics initialitzation
 	float wHalf = camera.widthUnits/2.0f;
 	float hHalf = camera.widthUnits*(float(m_window.getSize().y)/m_window.getSize().x)/2.0f;
-	glOrtho(-wHalf, wHalf, 
-			-hHalf, hHalf, -100, 100);	
+	glOrtho(-wHalf, wHalf, -hHalf, hHalf, -100, 100);	
 	glEnable(GL_BLEND);
 	glEnable(GL_TEXTURE_2D);
 	glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

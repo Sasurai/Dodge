@@ -77,11 +77,11 @@ int main()
 	gameState.update(time.asSeconds());
 	int state = 0; // Menu
 
-    while (window.isOpen())
-    {	
-		sf::Time time = clock.restart();
-		int ev;
-		gjApi.Update();
+  while (window.isOpen())
+  {	
+  sf::Time time = clock.restart();
+  int ev;
+  gjApi.Update();
 		switch(state){
 		case 5: // Login window
 			ev = loginWindow.checkEvents();
@@ -148,8 +148,6 @@ int main()
 			// I need to make a credits screen before release
 			break;
 		}
-		
-    }
-
-    return 0;
+  }
+  return 0;
 }
