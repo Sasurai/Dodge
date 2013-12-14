@@ -42,6 +42,8 @@ public:
 
 	virtual void update(double dt); 
 
+	virtual void kill();
+
 private:
 	float m_impulse;
 	double m_timeSinceLastImpulse;

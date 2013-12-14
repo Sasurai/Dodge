@@ -36,6 +36,8 @@ class Mine :
 	public Enemy
 {
 public:
+
+	virtual void kill();
 	Mine(GameState *gameState);
 	~Mine();
 };

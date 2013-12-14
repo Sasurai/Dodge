@@ -35,7 +35,13 @@ Mine::Mine(GameState *gameState) : Enemy(gameState)
 	addProperty("mine");
 }
 
-
 Mine::~Mine()
 {
+}
+
+void Mine::kill(){
+	Enemy::kill();
+	// Play explosion sound
+	m_gameState->getSoundManager().playSound(string("Sounds/Explosion3.ogg"));
+	// Trying to generate the explosion from here causes a crash that I can't figure out
 }

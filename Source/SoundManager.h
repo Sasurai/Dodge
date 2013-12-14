@@ -57,11 +57,14 @@ public:
 
 	bool loadSound(const string &soundName);
 
+	void setMuteSounds(bool mute){ m_muteSounds = mute; }
+
 	void clear();
 
 private:
 	map<string, sf::SoundBuffer*> m_soundBuffers;
 	vector<SoundObj> m_sounds;
+	bool m_muteSounds;
 };
 
 #endif

@@ -33,7 +33,7 @@
 LoginWindow::LoginWindow(sf::RenderWindow &window, gjAPI *gjApi) : BaseWindow(window, 2), m_gjApi(gjApi), m_focus(0), m_logged(false)
 {
 	// Initialize text elements
-  m_usernameText.setString("Username");
+	m_usernameText.setString("Username");
 	m_username = "Guest";
 	m_usernameText.setCharacterSize(20);
 	m_usernameText.setColor(sf::Color::Black);
@@ -66,8 +66,8 @@ LoginWindow::~LoginWindow()
 }
 
 int LoginWindow::checkEvents(){
-  sf::Event event;
-  m_nextState = 5;
+	sf::Event event;
+	m_nextState = 5;
     while (m_window.pollEvent(event))
 	{
         if(event.type == sf::Event::Closed)

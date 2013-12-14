@@ -200,7 +200,7 @@ void GameController::generateParticles(b2Vec2 &source){
 	When a mine explodes we need to generate FIREBALL_NUMBER fireballs, and also register that we have one
 	less mine in the game (since the total number of active mines is limited)
 */
-void GameController::explodeMine(b2Vec2 &source){
+void GameController::explodeMine(b2Vec2 source){
 	for(int i=0;i<FIREBALL_NUMBER;i++){
 		b2Vec2 tar = m_generateRandomPosition();
 		// Calculate the distance vector

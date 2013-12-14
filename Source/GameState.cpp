@@ -73,14 +73,14 @@ GameState::GameState(sf::RenderWindow &window, gjAPI* gjApi) :
 	m_nextState(1),
 	m_slowTime(1),
 	m_muteMusic(false),
-	m_muteSounds(false),
 	m_gjApi(gjApi)
 {
 	m_world.SetGravity(b2Vec2(0.0f,0.0f)); // No gravity
 	// Camera and graphics initialitzation
 	float wHalf = camera.widthUnits/2.0f;
 	float hHalf = camera.widthUnits*(float(m_window.getSize().y)/m_window.getSize().x)/2.0f;
-	glOrtho(-wHalf, wHalf, -hHalf, hHalf, -100, 100);	
+	glOrtho(-wHalf, wHalf, 
+			-hHalf, hHalf, -100, 100);	
 	glEnable(GL_BLEND);
 	glEnable(GL_TEXTURE_2D);
 	glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -144,10 +144,18 @@ GameState::GameState(sf::RenderWindow &window, gjAPI* gjApi) :
 	m_scoreSentText.setColor(sf::Color::Green);
 
 	// Load music and sounds
-	m_music.openFromFile("Sounds/Random_Space_Idea.ogg");
+	m_music.openFromFile("Sounds/Dodge_Level_Music.ogg");
 	m_music.setLoop(true);
 	m_music.setVolume(100);
-	m_soundManager.loadSound("Sounds/explode.wav");
+	m_endMusic.openFromFile("Sounds/End_Screen_Music.ogg");
+	m_endMusic.setLoop(true);
+	m_endMusic.setVolume(100);
+	m_soundManager.loadSound("Sounds/Explosion1.ogg");
+	m_soundManager.loadSound("Sounds/Explosion2.ogg");
+	m_soundManager.loadSound("Sounds/Explosion3.ogg");
+	m_soundManager.loadSound("Sounds/Points.ogg");
+	m_soundManager.loadSound("Sounds/Shield.ogg");
+	m_soundManager.loadSound("Sounds/Slow_Time.ogg");
 }
 
 GameState::~GameState()
@@ -236,8 +244,6 @@ void GameState::update(double dt){
 		if(!object->isAlive()){ // If a object has been killed we need to take the needed actions and then delete it
 			if(object->hasProperty("enemy")){
 				if(!object->hasProperty("fireball")){
-					if(!m_muteSounds)
-						m_soundManager.playSound(string("Sounds/explode.wav"));
 					m_enemiesKilled++;
 					m_score += m_gameController->getInternalLevel();
 					b2Vec2 pos = object->getPosition();
@@ -363,6 +369,7 @@ void GameState::setPaused(bool paused){
 			object->unpause();
 			++it;
 		}
+		m_endMusic.stop();
 		m_music.play();
 	}
 	if(m_gameController)
@@ -388,8 +395,11 @@ void GameState::setFinished(bool finished){
 		m_scoreText.setString(ss.str());
 		m_nextState = 1;
 	}
-	if(finished == true)
+	if(finished == true){
 		m_music.stop();
+		m_endMusic.play();
+
+	}
 	m_finished = finished;
 }
 
@@ -408,8 +418,10 @@ int GameState::checkEvents(){
 			sf::Vector2i mousePos = sf::Mouse::getPosition(m_window);
 			if(m_finished){ // Only if the game is finished will the back to menu and play again options show
 				if(mousePos.x > 375 && mousePos.x < 575 &&
-					mousePos.y > 500 && mousePos.y < 515)
+					mousePos.y > 500 && mousePos.y < 515){
+					m_endMusic.stop();
 					m_nextState = 0; // Back to menu
+				}
 				if(mousePos.x > 120 && mousePos.x < 500 &&
 					mousePos.y > 260 && mousePos.y < 320){ // Play again
 						setFinished(false);
@@ -460,15 +472,19 @@ void GameState::setSlowTime(double slowTime){
 }
 
 void GameState::setMuteSounds(bool muteSounds){
-	m_muteSounds = muteSounds;
+	m_soundManager.setMuteSounds(muteSounds);
 }
 
 void GameState::setMuteMusic(bool muteMusic){
 	m_muteMusic = muteMusic;
-	if(m_muteMusic)
+	if(m_muteMusic){
 		m_music.setVolume(0);
-	else
+		m_endMusic.setVolume(0);
+	}
+	else{
 		m_music.setVolume(100);
+		m_endMusic.setVolume(0);
+	}
 }
 
 void GameState::setLogged(bool logged){ 

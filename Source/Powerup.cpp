@@ -75,14 +75,18 @@ void Powerup::beginContact(b2Contact *contact){
 	else
 		obj = objectA;
 	if(obj->hasProperty("player")){ // Powerup picked
-		if(m_type == POINTS_POWERUP)
+		if(m_type == POINTS_POWERUP){
 			m_gameState->increasePoints();
-		if(m_type == SHIELD_POWERUP)
+			m_gameState->getSoundManager().playSound(string("Sounds/Points.ogg"));
+		}if(m_type == SHIELD_POWERUP){
 			m_gameState->getPlayer()->giveShield();
-		if(m_type == BOOM_POWERUP)
+			m_gameState->getSoundManager().playSound(string("Sounds/Shield.ogg"));
+		}if(m_type == BOOM_POWERUP)
 			m_gameState->killAll();
-		if(m_type == SLOW_POWERUP)
+		if(m_type == SLOW_POWERUP){
 			m_gameState->setSlowTime(0.1);
+			m_gameState->getSoundManager().playSound(string("Sounds/Slow_Time.ogg"));
+		}
 		kill();
 	}
 }

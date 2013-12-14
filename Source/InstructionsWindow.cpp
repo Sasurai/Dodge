@@ -31,9 +31,11 @@
 #include "InstructionsWindow.h"
 #include "GameState.h"
 
+
 InstructionsWindow::InstructionsWindow(sf::RenderWindow &window) : BaseWindow(window, 2)
 {
 }
+
 
 InstructionsWindow::~InstructionsWindow()
 {

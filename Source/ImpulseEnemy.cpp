@@ -34,6 +34,7 @@ ImpulseEnemy::ImpulseEnemy(GameState *gameState, float initialDelay) :
 	m_impulse(0.0),
 	m_timeSinceLastImpulse(0.0)
 {
+	addProperty("impulse");
 	setColor(1.0f,0.0f,0.0f);
 	sf::Texture *texture = m_gameState->getTextureManager().getTexture("Textures/Enemy2.png");
 	setTexture(*texture);
@@ -83,4 +84,10 @@ void ImpulseEnemy::update(double dt){
 
 void ImpulseEnemy::setTimeBetweenImpulses(float impInterval){
 	m_timeBetweenImpulses = impInterval;
+}
+
+void ImpulseEnemy::kill(){
+	Enemy::kill();
+	// Play explosion sound
+	m_gameState->getSoundManager().playSound(string("Sounds/Explosion1.ogg"));
 }

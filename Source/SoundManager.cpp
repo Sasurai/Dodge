@@ -58,6 +58,9 @@ SoundManager::~SoundManager(){
 }
 
 void SoundManager::playSound(string &soundName){
+	if(m_muteSounds)
+		return;
+
 	bool played = false;
 	vector<SoundObj>::iterator it; // Search for an available sound object with the required sound effect
 	for(it=m_sounds.begin();it!=m_sounds.end();++it){

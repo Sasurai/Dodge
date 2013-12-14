@@ -41,6 +41,8 @@ public:
 
 	virtual void update(double dt); 
 
+	virtual void kill();
+
 private:
 	float m_velocity;
 };

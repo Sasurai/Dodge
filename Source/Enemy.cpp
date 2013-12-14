@@ -75,11 +75,9 @@ void Enemy::beginContact(b2Contact *contact)
 		obj = objectB;
 	else
 		obj = objectA;
-	if(obj->hasProperty("enemy") && obj->isActive() && m_active){ // Crashed with another enemy
+	if((obj->hasProperty("enemy") && obj->isActive() && m_active) || // Crashed with another enemy
+	  (obj->hasProperty("player") && m_active) ) // Crashed with the player
 		kill(); // Only dies if both the enemy and itself are active
-	}else if(obj->hasProperty("player") && m_active){ // Crashed with the player 
-		kill(); //Only dies if it is active itself
-	}
 }
 
 void Enemy::endContact(b2Contact *contact)

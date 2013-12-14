@@ -100,8 +100,10 @@ public:
     virtual void PostSolve(b2Contact* contact, const b2ContactImpulse* impulse);
 
 	TextureManager& getTextureManager(){ return m_textureManager;}
+	SoundManager& getSoundManager(){ return m_soundManager; }
 	
 	void setGameController(GameController *gameController);
+	GameController* getGameController(){ return m_gameController; }
 	
 	int checkEvents();
 	
@@ -146,10 +148,11 @@ private:
 	double m_accumulator;
 
 	// Game music and sounds
-	sf::Music m_music;
-	SoundManager m_soundManager;
-	bool m_muteSounds;
 	bool m_muteMusic;
+	sf::Music m_music;
+	sf::Music m_endMusic;
+	SoundManager m_soundManager;
+	
 
 	// Scores and stats
 	double m_totalTime;

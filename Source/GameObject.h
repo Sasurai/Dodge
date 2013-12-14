@@ -75,7 +75,7 @@ public:
 	// State
 	bool isAlive(){ return m_alive; }
 	bool isActive(){ return m_active; }
-	void kill() { m_alive = false; }
+	virtual void kill() { m_alive = false; }
 
 	// Rendering
 	bool isVisible(){ return m_visible; }

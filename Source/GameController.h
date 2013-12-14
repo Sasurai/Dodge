@@ -68,7 +68,7 @@ public:
 	void update(double dt);
 	void setPaused(bool paused);
 	void resetGame();
-	void explodeMine(b2Vec2 &source);
+	void explodeMine(b2Vec2 source);
 	void generateParticles(b2Vec2 &source);
 	int getInternalLevel(){ return m_internalLevel; } // Used by GameState for score calculations
 

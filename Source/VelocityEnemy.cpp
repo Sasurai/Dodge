@@ -33,6 +33,7 @@ VelocityEnemy::VelocityEnemy(GameState *gameState, float initialDelay) :
 	Enemy(gameState, initialDelay),
 	m_velocity(0.0)
 {
+	addProperty("velocity");
 	setColor(0.75f, 0.45f,0.0f);
 	sf::Texture *texture = m_gameState->getTextureManager().getTexture("Textures/Enemy1.png");
 	setTexture(*texture);
@@ -72,4 +73,10 @@ void VelocityEnemy::update(double dt)
 			m_body->SetLinearVelocity(b2Vec2(ndx, ndy));
 		}
 	}
+}
+
+void VelocityEnemy::kill(){
+	Enemy::kill();
+	// Play explosion sound
+	m_gameState->getSoundManager().playSound(string("Sounds/Explosion2.ogg"));
 }
