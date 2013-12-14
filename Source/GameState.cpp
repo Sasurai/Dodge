@@ -1,5 +1,5 @@
 /* **************************************************************************************** *
-	Copyright (c) 2013 Jorge Martínez Vargas												*
+	Copyright (c) 2013 Jorge Martï¿½nez Vargas												*
 *																							*
 *	Permission is hereby granted, free of charge, to any person obtaining a copy			*
 *	of this software and associated documentation files (the "Software"), to deal			*
@@ -483,7 +483,7 @@ void GameState::setMuteMusic(bool muteMusic){
 	}
 	else{
 		m_music.setVolume(100);
-		m_endMusic.setVolume(0);
+		m_endMusic.setVolume(100);
 	}
 }
 
